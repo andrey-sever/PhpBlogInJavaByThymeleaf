@@ -1,0 +1,11 @@
+#DB
+spring.datasource:
+  url: jdbc:mysql://localhost:3306/blog_php
+  username: root
+  password: 111111
+
+#JPA
+spring.jpa:
+  generate-ddl: false # инициализация схемы (отключено)
+  hibernate.ddl-auto: none # Нет инициализации схемы базы данных
+#  show-sql: true

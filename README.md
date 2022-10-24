@@ -1,0 +1,1 @@
+### Переделан блог из PHP. В Java + Spring + Thymeleaf. Без JavaScript

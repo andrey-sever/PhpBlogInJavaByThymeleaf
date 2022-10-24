@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="~{fragments/head_fragment :: headFragment}"></head>
+<body>
+
+    <div th:replace="~{fragments/header_fragment :: headerFragment}"></div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div th:each="article : ${articles}">
+                    <h2 th:text="${article.title}"></h2>
+                    <p th:text="${article.intro}"></p>
+                    <p>
+                        <b>Автор статьи:</b><mark th:text="${article.author}"></mark>
+                        (<i>Время публикации: </i><u th:text="${#calendars.format(article.date,'dd MMMM yyyy HH:mm')}"></u>)
+                    </p>
+                    <p> Комментариев: <span th:text="${article.count}"></span></p>
+                    <a href="/news.html" th:href="@{/news.html/{id}(id=${article.id})}">
+                        <button class="btn btn-warning mb-5">Прочитать больше</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div th:replace="~{fragments/aside_fragment :: asideFragment}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer_fragment :: footerFragment}"></div>
+
+</body>
+</html>

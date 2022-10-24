@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="~{fragments/head_fragment :: headFragment}"></head>
+
+  <div th:replace="~{fragments/header_fragment :: headerFragment}"></div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <h4>Добавление статьи</h4>
+        <form th:action="@{/article}" th:object="${article}" th:method="post">
+          <label>Заголовок статьи</label>
+          <input type="text" th:field="*{title}" class="form-control">
+
+          <label>Интро статьи</label>
+          <textarea th:field="*{intro}" class="form-control"></textarea>
+
+          <label>Текст статьи</label>
+          <textarea th:field="*{text}" class="form-control"></textarea>
+
+          <div th:if="${errorBlock} != '1'" th:text="${errorBlock}" class="alert alert-danger mt-2"></div>
+
+          <button th:if="${successBlock} == ''" type="submit" class="btn btn-success mt-3">Добавить</button>
+          <div th:if="${successBlock} != ''" class="alert alert-success" role="alert">Готово!</div>
+        </form>
+      </div>
+
+      <div class="col-md-4">
+        <div th:replace="~{fragments/aside_fragment :: asideFragment}"></div>
+      </div>
+    </div>
+  </div>
+
+<div th:replace="~{fragments/footer_fragment :: footerFragment}"></div>
+
+</body>
+</html>

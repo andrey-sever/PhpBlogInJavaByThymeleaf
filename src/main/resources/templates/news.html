@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="~{fragments/head_fragment :: headFragment}"></head>
+<body>
+
+  <div th:replace="~{fragments/header_fragment :: headerFragment}"></div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div class="jumbotron">
+          <h1 th:text="${articleOne.title}"></h1>
+          <p><b>Автор статьи:</b><mark th:text="${articleOne.author}"></mark></p>
+          <p><b>Время публикации: </b><u th:text="${timePublic}"></u></p>
+          <p>
+            <span th:text="${articleOne.intro}"></span>
+            <br><br>
+            <span th:text="${articleOne.text}"></span>
+          </p>
+
+          <h3 class="mt-5">Комментарии</h3>
+          <div th:if="${errorComment} == ''" class="mb-5">
+            <form th:action="@{/news}" th:object="${commentNew}" th:method="post">
+              <label>Сообщение</label>
+              <textarea th:field="*{message}" class="form-control"></textarea>
+
+              <input type="text" th:field="*{login}" class="hiddenCommentData">
+              <input type="number" th:field="*{articleId}" class="hiddenCommentData">
+
+<!--              <div th:if="${errorBlock} != '1'" th:text="${errorBlock}" class="alert alert-danger mt-2"></div>-->
+<!--              <div th:errors="*{message}" class="alert alert-danger mt-2"/>-->
+
+              <button type="submit" class="btn btn-success mt-3">Добавить комментарий</button>
+            </form>
+          </div>
+          <div th:if="${errorComment} != ''">
+            <div th:text="${errorComment}" class="alert alert-warning" role="alert"></div>
+          </div>
+
+          <div th:each="comment : ${comments}">
+            <div class="alert alert-info mb-2">
+              <h4 th:text="${comment.login}"></h4>
+              <p th:text="${comment.message}"></p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-md-4">
+        <div th:replace="~{fragments/aside_fragment :: asideFragment}"></div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer_fragment :: footerFragment}"></div>
+
+</body>
+</html>

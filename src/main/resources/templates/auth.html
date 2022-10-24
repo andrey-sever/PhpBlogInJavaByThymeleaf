@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head th:replace="~{fragments/head_fragment :: headFragment}"></head>
+<body>
+
+  <div th:replace="~{fragments/header_fragment :: headerFragment}"></div>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-8 mb-4">
+        <div th:if="${loginByCookies} != null">
+          <h2><p th:text="${loginByCookies.name}"></p></h2>
+          <form th:action="@{/authExit}" th:method="post">
+            <button type="submit" class="btn btn-danger">Выйти</button>
+          </form>
+        </div>
+        <div th:if="${loginByCookies} == null">
+          <h4>Форма авторизации</h4>
+          <form th:action="@{/auth}" th:object="${loginPassword}" th:method="post">
+            <label>Логин</label>
+            <input type="text" th:field="*{login}" class="form-control">
+
+            <label>Пароль</label>
+            <input type="password" th:field="*{pass}" class="form-control">
+
+            <div th:if="${errorBlock} != '1'" th:text="${errorBlock}" class="alert alert-danger mt-2"></div>
+
+            <button type="submit" class="btn btn-success mt-3">Войти</button>
+          </form>
+          </div>
+      </div>
+
+      <div class="col-md-4">
+        <div th:replace="~{fragments/aside_fragment :: asideFragment}"></div>
+      </div>
+    </div>
+  </div>
+
+  <div th:replace="~{fragments/footer_fragment :: footerFragment}"></div>
+
+</body>
+</html>
