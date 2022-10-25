@@ -1,7 +1,6 @@
 package com.sulima.data;
 
 import com.sulima.model.Articles;
-import com.sulima.model.ArticlesCountComments;
 import com.sulima.model.Comments;
 import com.sulima.dao.ArticlesRepository;
 import com.sulima.dao.CommentsRepository;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,22 +28,13 @@ public class ArticlesService {
         articlesRepository.save(article);
     }
 
-    public List<ArticlesCountComments> getListArticles() {
+    public List<Articles> getListArticles() {
 //        return articlesRepository.findAllByOrderByDateDesc();
         List<Articles> articlesList = articlesRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
-        ArrayList<ArticlesCountComments> countComments = new ArrayList<>();
         for (Articles article : articlesList) {
-            ArticlesCountComments articlesCountComments = new ArticlesCountComments();
-            articlesCountComments.setId(article.getId());
-            articlesCountComments.setTitle(article.getTitle());
-            articlesCountComments.setIntro(article.getIntro());
-            articlesCountComments.setText(article.getText());
-            articlesCountComments.setDate(article.getDate());
-            articlesCountComments.setAuthor(article.getAuthor());
-            articlesCountComments.setCount(getCountCommentsByArticleId(article.getId()));
-            countComments.add(articlesCountComments);
+            article.setCount(getCountCommentsByArticleId(article.getId()));
         }
-        return countComments;
+        return articlesList;
     }
 
     public Articles getArticleById(Integer id) {
