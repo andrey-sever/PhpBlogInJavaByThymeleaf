@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Integer> {
 
-    List<Comments> findAllByArticleId(Integer id);
+    List<Comments> findAllByArticleIdOrderByIdDesc(Integer id);
 
     int countByArticleId(Integer id);
 }

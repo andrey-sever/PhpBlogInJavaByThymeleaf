@@ -46,7 +46,7 @@ public class ArticlesService {
     }
 
     public List<Comments> getListComments(Integer id) {
-        return commentsRepository.findAllByArticleId(id);
+        return commentsRepository.findAllByArticleIdOrderByIdDesc(id);
     }
 
     public String getDateInHuman(Long dateIn) {
