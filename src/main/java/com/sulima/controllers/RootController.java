@@ -52,7 +52,7 @@ public class RootController {
         Articles article = articlesService.getArticleById(id);
         Users userByCookie = mainService.getUserByCookie(request);
         Comments newComment = articlesService.fillDataFromNewComment(id, userByCookie);
-        model.addAttribute("currentTitle", "Статья блога");
+        model.addAttribute("currentTitle", article.getTitle());
         model.addAttribute("comments", articlesService.getListComments(id));
         model.addAttribute("commentNew", newComment);
         model.addAttribute("articleOne", article);

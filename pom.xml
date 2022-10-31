@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.sulima</groupId>
 	<artifactId>php_blog_in_java_by_thymeleaf</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<name>PhpBlogInJavaByThymeleaf</name>
 	<description>Test project rework with php by thymeleaf</description>
 	<properties>
